@@ -1,0 +1,6 @@
+{
+  "WarningTemperature": 60,
+  "AlarmTemperature": 80,
+  "RefreshInterval": 2000,
+  "MachineCount": 3
+}
