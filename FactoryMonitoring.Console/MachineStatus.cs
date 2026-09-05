@@ -1,8 +1,8 @@
 ﻿namespace MachineStatusMonitor;
 
-enum MachineStatus
+public enum MachineStatus
 {
-    Ok,
-    Warning,
-    Alarm
+    Running,
+    Stopped,
+    Error
 }
