@@ -1,4 +1,6 @@
-﻿namespace MachineStatusMonitor;
+﻿using MachineStatusMonitor;
+
+namespace FactoryMonitoring.Console;
 
 public class Machine
 {
@@ -8,7 +10,10 @@ public class Machine
 
     public MachineStatus Status { get; private set; }
 
-    public Machine(string name, int temperature, MachineStatus status)
+    public Machine(
+        string name,
+        int temperature,
+        MachineStatus status)
     {
         if (string.IsNullOrWhiteSpace(name))
         {

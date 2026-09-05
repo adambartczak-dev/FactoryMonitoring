@@ -1,19 +1,20 @@
-﻿using MachineStatusMonitor;
+﻿using FactoryMonitoring.Console;
+using MachineStatusMonitor;
 
-Machine machine = new Machine(
-    "Machine 1",
-    50,
-    MachineStatus.Running
+ProductionMachine productionMachine = new ProductionMachine(
+    "CNC-01",
+    55,
+    MachineStatus.Running,
+    "Gear"
 );
 
-Console.WriteLine(machine.Name);
-Console.WriteLine(machine.Temperature);
-Console.WriteLine(machine.Status);
+Console.WriteLine($"Machine: {productionMachine.Name}");
+Console.WriteLine($"Temperature: {productionMachine.Temperature}");
+Console.WriteLine($"Status: {productionMachine.Status}");
+Console.WriteLine($"Product: {productionMachine.ProductName}");
+Console.WriteLine($"Produced: {productionMachine.UnitsProduced}");
 
-machine.UpdateTemperature(75);
-machine.ChangeStatus(MachineStatus.Stopped);
+productionMachine.Produce(10);
+productionMachine.Produce(5);
 
-Console.WriteLine();
-Console.WriteLine(machine.Temperature);
-Console.WriteLine(machine.Status);
-
+Console.WriteLine($"Produced after production: {productionMachine.UnitsProduced}");
