@@ -19,3 +19,4 @@ Industrial machine monitoring application written in C#.
 ## Project status
 
 Work in progress.
+Repository hosted on GitHub.
