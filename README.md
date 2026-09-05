@@ -15,3 +15,7 @@ Industrial machine monitoring application written in C#.
 
 - C#
 - .NET
+
+## Project status
+
+Work in progress.
