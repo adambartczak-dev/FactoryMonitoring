@@ -15,8 +15,5 @@ machine.ChangeStatus(MachineStatus.Stopped);
 
 Console.WriteLine();
 Console.WriteLine(machine.Temperature);
-<<<<<<< HEAD
 Console.WriteLine(machine.Status);
-=======
-Console.WriteLine(machine.Status);
->>>>>>> feature/encapsulation
+
