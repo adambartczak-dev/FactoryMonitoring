@@ -1,5 +1,3 @@
-﻿using MachineStatusMonitor;
-
 namespace FactoryMonitoring.Console;
 
 public class Machine

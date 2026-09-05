@@ -1,5 +1,4 @@
 ﻿using FactoryMonitoring.Console;
-using MachineStatusMonitor;
 
 ProductionMachine productionMachine = new ProductionMachine(
     "CNC-01",
