@@ -1,19 +1,43 @@
 ﻿namespace MachineStatusMonitor;
 
-class Machine
+public class Machine
 {
-    public string Name { get; set; }
-    public int Temperature { get; set; }
-    public bool IsRunning { get; set; }
+    public string Name { get; }
 
-    public Machine()
+    public int Temperature { get; private set; }
+
+    public MachineStatus Status { get; private set; }
+
+    public Machine(string name, int temperature, MachineStatus status)
     {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            throw new ArgumentException(
+                "Machine name cannot be emptyAAA.",
+                nameof(name)
+            );
+        }
+
+        Name = name;
+        UpdateTemperature(temperature);
+        Status = status;
     }
 
-    public Machine(string name)
+    public void UpdateTemperature(int temperature)
     {
-        Name = name;
-        Temperature = 20;
-        IsRunning = true;
+        if (temperature < -50 || temperature > 200)
+        {
+            throw new ArgumentOutOfRangeException(
+                nameof(temperature),
+                "Temperature must be between -50 and 200."
+            );
+        }
+
+        Temperature = temperature;
+    }
+
+    public void ChangeStatus(MachineStatus status)
+    {
+        Status = status;
     }
 }
