@@ -1,4 +1,4 @@
-# Factory Monitoring
+# Industrial Factory Monitoring
 
 Industrial machine monitoring application written in C#.
 
