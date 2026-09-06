@@ -1,8 +1,8 @@
-﻿namespace FactoryMonitoring.Console;
+﻿namespace MachineStatusMonitor;
 
 public enum MachineStatus
 {
     Running,
     Stopped,
-    Error
+    Warning
 }

@@ -1,61 +1,34 @@
-namespace FactoryMonitoring.Console;
+namespace MachineStatusMonitor;
 
-public class Machine : IAlarmSource
+public abstract class Machine
 {
-    public string Name { get; }
+    public string Name { get; set; }
+    public int Temperature { get; set; }
+    public MachineStatus Status { get; set; }
 
-    public int Temperature { get; private set; }
-
-    public MachineStatus Status { get; private set; }
+    public AlarmManager AlarmManager { get; }
 
     public Machine(
         string name,
         int temperature,
         MachineStatus status)
     {
-        if (string.IsNullOrWhiteSpace(name))
-        {
-            throw new ArgumentException(
-                "Machine name cannot be empty.",
-                nameof(name)
-            );
-        }
-
         Name = name;
-        UpdateTemperature(temperature);
+        Temperature = temperature;
         Status = status;
+
+        AlarmManager = new AlarmManager();
     }
 
-    public void UpdateTemperature(int temperature)
+    public void CheckTemperature()
     {
-        if (temperature < -50 || temperature > 200)
+        if (Temperature > 80)
         {
-            throw new ArgumentOutOfRangeException(
-                nameof(temperature),
-                "Temperature must be between -50 and 200."
+            AlarmManager.AddAlarm(
+                $"{Name}: Temperature too high ({Temperature}°C)"
             );
         }
-
-        Temperature = temperature;
     }
 
-    public void ChangeStatus(MachineStatus status)
-    {
-        Status = status;
-    }
-
-    public bool HasAlarm()
-    {
-        return Temperature > 80;
-    }
-
-    public string GetAlarmMessage()
-    {
-        if (HasAlarm())
-        {
-            return $"ALARM: {Name}, temperature: {Temperature}°C";
-        }
-
-        return $"No alarm for {Name}.";
-    }
+    public abstract void ShowMachineInfo();
 }

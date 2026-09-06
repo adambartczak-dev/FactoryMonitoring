@@ -1,23 +1,55 @@
-﻿using FactoryMonitoring.Console;
+﻿using MachineStatusMonitor;
 
-Machine machine = new Machine(
-    "Machine-01",
-    90,
+List<Machine> machines = new()
+{
+    new ProductionMachine(
+        "CNC-01",
+        65,
+        MachineStatus.Running,
+        1200),
+
+    new ProductionMachine(
+        "CNC-02",
+        92,
+        MachineStatus.Warning,
+        850),
+
+    new MaintenanceMachine(
+        "PRESS-01",
+        40,
+        MachineStatus.Stopped,
+        DateTime.Now.AddDays(-10)),
+
+    new RobotMachine(
+        "ROBOT-01",
+        85,
+        MachineStatus.Running,
+        6),
+
+    new RobotMachine(
+        "ROBOT-02",
+        55,
+        MachineStatus.Stopped,
+        6)
+};
+
+MachineMonitor monitor = new(machines);
+
+monitor.ShowAllMachines();
+
+monitor.ShowSummary();
+
+Console.WriteLine();
+
+monitor.ShowHotMachines(80);
+
+Console.WriteLine();
+
+monitor.ShowMachinesByStatus(
     MachineStatus.Running
 );
 
-TemperatureSensor sensor = new TemperatureSensor(
-    "Sensor-01",
-    95
-);
+Console.WriteLine();
 
-Console.WriteLine(machine.GetAlarmMessage());
-Console.WriteLine(sensor.GetAlarmMessage());
-
-static void PrintAlarm(IAlarmSource source)
-{
-    Console.WriteLine(source.GetAlarmMessage());
-}
-
-PrintAlarm(machine);
-PrintAlarm(sensor);
+monitor.CheckAllMachines();
+monitor.ShowAllAlarms();

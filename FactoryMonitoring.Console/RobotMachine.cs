@@ -1,25 +1,25 @@
-namespace MachineStatusMonitor;
+﻿namespace MachineStatusMonitor;
 
-public class ProductionMachine : Machine
+public class RobotMachine : Machine
 {
-    public int ProductionCount { get; set; }
+    public int AxisCount { get; set; }
 
-    public ProductionMachine(
+    public RobotMachine(
         string name,
         int temperature,
         MachineStatus status,
-        int productionCount)
+        int axisCount)
         : base(name, temperature, status)
     {
-        ProductionCount = productionCount;
+        AxisCount = axisCount;
     }
 
     public override void ShowMachineInfo()
     {
-        Console.WriteLine("=== PRODUCTION MACHINE ===");
+        Console.WriteLine("=== ROBOT MACHINE ===");
         Console.WriteLine($"Name: {Name}");
         Console.WriteLine($"Temperature: {Temperature}°C");
         Console.WriteLine($"Status: {Status}");
-        Console.WriteLine($"Production count: {ProductionCount}");
+        Console.WriteLine($"Axis count: {AxisCount}");
     }
 }
