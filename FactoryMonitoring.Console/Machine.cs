@@ -1,6 +1,6 @@
 namespace FactoryMonitoring.Console;
 
-public class Machine
+public class Machine : IAlarmSource
 {
     public string Name { get; }
 
@@ -42,5 +42,20 @@ public class Machine
     public void ChangeStatus(MachineStatus status)
     {
         Status = status;
+    }
+
+    public bool HasAlarm()
+    {
+        return Temperature > 80;
+    }
+
+    public string GetAlarmMessage()
+    {
+        if (HasAlarm())
+        {
+            return $"ALARM: {Name}, temperature: {Temperature}°C";
+        }
+
+        return $"No alarm for {Name}.";
     }
 }

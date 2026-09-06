@@ -1,19 +1,23 @@
 ﻿using FactoryMonitoring.Console;
 
-ProductionMachine productionMachine = new ProductionMachine(
-    "CNC-01",
-    55,
-    MachineStatus.Running,
-    "Gear"
+Machine machine = new Machine(
+    "Machine-01",
+    90,
+    MachineStatus.Running
 );
 
-Console.WriteLine($"Machine: {productionMachine.Name}");
-Console.WriteLine($"Temperature: {productionMachine.Temperature}");
-Console.WriteLine($"Status: {productionMachine.Status}");
-Console.WriteLine($"Product: {productionMachine.ProductName}");
-Console.WriteLine($"Produced: {productionMachine.UnitsProduced}");
+TemperatureSensor sensor = new TemperatureSensor(
+    "Sensor-01",
+    95
+);
 
-productionMachine.Produce(10);
-productionMachine.Produce(5);
+Console.WriteLine(machine.GetAlarmMessage());
+Console.WriteLine(sensor.GetAlarmMessage());
 
-Console.WriteLine($"Produced after production: {productionMachine.UnitsProduced}");
+static void PrintAlarm(IAlarmSource source)
+{
+    Console.WriteLine(source.GetAlarmMessage());
+}
+
+PrintAlarm(machine);
+PrintAlarm(sensor);
