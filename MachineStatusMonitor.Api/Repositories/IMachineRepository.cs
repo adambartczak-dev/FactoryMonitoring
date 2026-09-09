@@ -10,5 +10,7 @@ public interface IMachineRepository
 
     Machine Add(Machine machine);
 
-    void Remove(Machine machine);
+    bool Update(int id, Machine updatedMachine);
+
+    bool Remove(int id);
 }

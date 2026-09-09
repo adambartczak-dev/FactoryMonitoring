@@ -41,30 +41,11 @@ public class MachineService : IMachineService
 
     public bool Update(int id, Machine updatedMachine)
     {
-        Machine? machine = _machineRepository.GetById(id);
-
-        if (machine == null)
-        {
-            return false;
-        }
-
-        machine.Name = updatedMachine.Name;
-        machine.Temperature = updatedMachine.Temperature;
-
-        return true;
+        return _machineRepository.Update(id, updatedMachine);
     }
 
     public bool Delete(int id)
     {
-        Machine? machine = _machineRepository.GetById(id);
-
-        if (machine == null)
-        {
-            return false;
-        }
-
-        _machineRepository.Remove(machine);
-
-        return true;
+        return _machineRepository.Remove(id);
     }
 }

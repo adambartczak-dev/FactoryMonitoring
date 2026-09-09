@@ -1,36 +1,39 @@
-﻿using MachineStatusMonitor.Api.Models;
+﻿using MachineStatusMonitor.Api.Data;
+using MachineStatusMonitor.Api.Models;
 
 namespace MachineStatusMonitor.Api.Repositories;
 
-public class InMemoryMachineRepository : IMachineRepository
+public class EfMachineRepository : IMachineRepository
 {
-    private readonly List<Machine> _machines = new();
+    private readonly AppDbContext _context;
 
-    private int _nextId = 1;
+    public EfMachineRepository(AppDbContext context)
+    {
+        _context = context;
+    }
 
     public List<Machine> GetAll()
     {
-        return _machines;
+        return _context.Machines.ToList();
     }
 
     public Machine? GetById(int id)
     {
-        return _machines
+        return _context.Machines
             .FirstOrDefault(m => m.Id == id);
     }
 
     public Machine Add(Machine machine)
     {
-        machine.Id = _nextId++;
-
-        _machines.Add(machine);
+        _context.Machines.Add(machine);
+        _context.SaveChanges();
 
         return machine;
     }
 
     public bool Update(int id, Machine updatedMachine)
     {
-        var machine = _machines
+        var machine = _context.Machines
             .FirstOrDefault(m => m.Id == id);
 
         if (machine is null)
@@ -42,12 +45,14 @@ public class InMemoryMachineRepository : IMachineRepository
         machine.Status = updatedMachine.Status;
         machine.Temperature = updatedMachine.Temperature;
 
+        _context.SaveChanges();
+
         return true;
     }
 
     public bool Remove(int id)
     {
-        var machine = _machines
+        var machine = _context.Machines
             .FirstOrDefault(m => m.Id == id);
 
         if (machine is null)
@@ -55,7 +60,8 @@ public class InMemoryMachineRepository : IMachineRepository
             return false;
         }
 
-        _machines.Remove(machine);
+        _context.Machines.Remove(machine);
+        _context.SaveChanges();
 
         return true;
     }

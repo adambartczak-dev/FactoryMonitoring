@@ -6,5 +6,9 @@ public class Machine
 
     public string Name { get; set; } = string.Empty;
 
+    public string Status { get; set; } = string.Empty;
+
     public double Temperature { get; set; }
+
+    public List<Alarm> Alarms { get; set; } = new();
 }

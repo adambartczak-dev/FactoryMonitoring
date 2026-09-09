@@ -10,12 +10,27 @@ Accept: application/json
 
 ###
 
+GET {{host}}/api/Machines/1/alarms
+Accept: application/json
+
+###
+
 POST {{host}}/api/Machines
 Content-Type: application/json
 
 {
-  "name": "Robot montażowy",
-  "temperature": 42
+  "name": "CNC-01",
+  "status": "Running",
+  "temperature": 55
+}
+
+###
+
+POST {{host}}/api/Machines/1/alarms
+Content-Type: application/json
+
+{
+  "message": "Emergency stop"
 }
 
 ###
@@ -26,6 +41,7 @@ Content-Type: application/json
 {
   "id": 1,
   "name": "Robot spawalniczy",
+  "status": "Stopped",
   "temperature": 55
 }
 
