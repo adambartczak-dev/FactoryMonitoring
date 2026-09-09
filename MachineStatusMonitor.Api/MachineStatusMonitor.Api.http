@@ -1,0 +1,35 @@
+@host = https://localhost:7265
+
+GET {{host}}/api/Machines
+Accept: application/json
+
+###
+
+GET {{host}}/api/Machines/hot?minTemperature=30&maxTemperature=60
+Accept: application/json
+
+###
+
+POST {{host}}/api/Machines
+Content-Type: application/json
+
+{
+  "name": "Robot montażowy",
+  "temperature": 42
+}
+
+###
+
+PUT {{host}}/api/Machines/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Robot spawalniczy",
+  "temperature": 55
+}
+
+###
+
+DELETE {{host}}/api/Machines/1
+Content-Type: application/json
