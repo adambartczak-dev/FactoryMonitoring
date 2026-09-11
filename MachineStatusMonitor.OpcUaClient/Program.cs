@@ -1,4 +1,5 @@
-﻿using Opc.Ua;
+﻿using MachineStatusMonitor.OpcUaClient;
+using Opc.Ua;
 using Opc.Ua.Client;
 using System.Net.Http.Json;
 using System.Text.Json.Nodes;
@@ -12,6 +13,10 @@ string apiBaseUrl =
 int machineId = 2;
 
 using var httpClient = new HttpClient();
+
+var mqttPublisher = new MqttPublisher();
+
+await mqttPublisher.ConnectAsync();
 
 Console.WriteLine("Machine Status Monitor - OPC UA Client");
 Console.WriteLine($"OPC UA Server: {serverUrl}");
@@ -178,7 +183,11 @@ subscription.Delete(true);
 
 session.Close();
 
-Console.WriteLine("Rozłączono.");
+Console.WriteLine("Rozłączono z OPC UA.");
+
+await mqttPublisher.DisconnectAsync();
+
+Console.WriteLine("Rozłączono z MQTT.");
 
 async void OnNotification(
     MonitoredItem item,
@@ -206,6 +215,17 @@ async void OnNotification(
         {
             Console.WriteLine(
                 $"[API] Błąd: {ex.Message}");
+        }
+
+        try
+        {
+            await mqttPublisher.PublishTemperatureAsync(
+                temperature);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(
+                $"[MQTT] Błąd: {ex.Message}");
         }
 
         Console.Write(
