@@ -5,6 +5,11 @@ Accept: application/json
 
 ###
 
+GET {{host}}/api/Machines/2
+Accept: application/json
+
+###
+
 GET {{host}}/api/Machines/hot?minTemperature=30&maxTemperature=60
 Accept: application/json
 

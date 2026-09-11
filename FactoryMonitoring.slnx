@@ -5,4 +5,5 @@
   </Folder>
   <Project Path="FactoryMonitoring.Console/FactoryMonitoring.Console.csproj" />
   <Project Path="MachineStatusMonitor.Api/MachineStatusMonitor.Api.csproj" Id="616a6da1-4467-4404-912d-e3bd55e7dac2" />
+  <Project Path="MachineStatusMonitor.OpcUaClient/MachineStatusMonitor.OpcUaClient.csproj" Id="9234ceda-999c-47c2-84ff-621702c5e301" />
 </Solution>
